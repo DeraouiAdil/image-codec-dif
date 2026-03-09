@@ -1,0 +1,50 @@
+Partie Script & Tests Automatiques
+==================================
+
+Ce dossier contient un script Python (`demo.py`) qu'on a fait pour automatiser les tests de la lib C sans devoir taper les commandes à la main à chaque fois.
+
+Il y a aussi un Makefile pour lancer les deux scénarios de test demandés.
+
+PREREQUIS
+---------
+1. La librairie C doit être compilée.
+   (Faites `make lib` dans le dossier CoDec ou juste `make` ici, ça le fera automatiquement).
+2. Pour que la conversion (jpg -> pnm) et l'affichage marchent, il faut "ImageMagick" (commandes `convert` et `display`).
+
+SCENARIOS AUTOMATIQUES (via Makefile)
+-------------------------------------
+On a préparé deux commandes rapides pour tester les cas d'usage :
+
+1. Test complet (Encodeur + Décodeur)
+   $ make run_img
+   -> Ça prend les images dans `../img`
+   -> Ça les encode dans un dossier temporaire `out_dif`
+   -> Ça les redécode ensuite dans `out_pnm`
+   C'est pour vérifier que ce qu'on encode est bien décodable.
+
+2. Test de décodage seul
+   $ make run_dif
+   -> Ça prend vos fichiers .dif situés dans `../dif`
+   -> Ça les décode directement dans `out_from_dif`
+   C'est pour vérifier si on arrive à lire des fichiers .dif existants.
+
+UTILISATION MANUELLE
+--------------------
+Si vous voulez tester fichier par fichier avec le script python :
+
+Syntaxe : python3 demo.py [fichiers...] <action> [dossier_sortie] [--show]
+
+Exemples :
+- Encoder une image :
+  $ python3 demo.py ../img/test.pgm encode resultat_dif
+
+- Décoder tout un dossier :
+  $ python3 demo.py resultat_dif/ decode mon_rendu
+
+- Décoder et afficher l'image (si ImageMagick est là) :
+  $ python3 demo.py fichier.dif decode . --show
+
+NETTOYAGE
+---------
+Pour effacer tous les dossiers de résultats générés par les tests :
+$ make clean

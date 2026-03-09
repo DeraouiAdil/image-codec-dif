@@ -1,0 +1,55 @@
+===========================================================
+PROJET : Encodeur/Decodeur Differentiel (DIF)
+COURS  : Programmation Avancee (L3)
+DATE   : Janvier 2026
+===========================================================
+
+-Adil Deraoui
+-Alexis Kerbiriou
+
+  COMPILATION
+-----------------------------------------------------------
+Le projet se compile avec un Makefile situe dans le dossier CoDec.
+
+Commandes a taper dans le terminal :
+   $ cd CoDec
+   $ make
+
+Cela cree deux fichiers dans le dossier bin :
+- bin/codec (le programme principal)
+- bin/libcodec.so (la librairie utilisee dans le script Python)
+
+Pour effacer les fichiers compiles :
+   $ make clean
+
+  EXEMPLES D'EXECUTION
+-----------------------------------------------------------
+Le programme s'utilise en ligne de commande.
+
+a) Encoder une image (PNM vers DIF) :
+   $ ./bin/codec -e images/test.pgm resultat.dif
+
+b) Decoder une image (DIF vers PNM) :
+   $ ./bin/codec -d resultat.dif reconstruction.pgm
+
+c) Decoder et afficher l'image (Option -s) :
+   $ ./bin/codec -d -s resultat.dif reconstruction.pgm
+
+d) Utiliser le script de demo (Dossier Demo) :
+   $ python3 demo.py ../CoDec/img/ encode dossier_sortie
+
+  ETAT DU PROJET ET REMARQUES
+-----------------------------------------------------------
+Ce qui marche :
+- L'encodage et le decodage fonctionnent correctement.
+- Le taux de compression s'affiche bien.
+- Le format binaire DIF est respecte.
+- Le script Python traite bien les dossiers entiers.
+
+Difficultes rencontrees :
+- Le visualiseur par defaut de Linux (eog) plantait sur notre machine
+- Nous avons modifie le code pour utiliser "display" (ImageMagick) a la place
+- Le débogage était compliqué : un seul bit de décalage dans le flux VLC et 
+  toute l'image se retrouvait corrompue ou décalée, ce qui rendait l'erreur difficile à localiser.
+- On a eu des difficultés à mettre en application les consignes demandées
+- On a pas mal galéré sur la compréhension de l'algo de "repliement" pour la transformation différentielle. 
